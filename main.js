@@ -1,6 +1,9 @@
-let num1 = 0;
-let num2 = 0;
-let operation;
+let num1 = "";
+let num2 = "";
+let operation = "";
+
+const output = document.querySelector(".result")
+output.innerHTML = "0";
 
 function add(x,y) {
     return x + y;
@@ -31,8 +34,45 @@ function operate(val1,val2,oper) {
 }
 
 function buttonLogic(number) {
-    console.log(number)
+    if (operation == "") {
+        num1 += number.toString()
+        console.log(num1)
+    }
+    else if (operation != "") {
+        num2 += number.toString()
+        console.log(num2)
+    }
+
 }
+
+function clear(result) {
+    num1 = result
+    num2 = ""
+    operation = ""
+    console.log(num1)
+}
+
+function applyOperation() {
+    if (num1 != "" && num2 != "" && operation != "") {
+        if (operation == "+") {
+            output.innerHTML = add(+num1,+num2)
+            clear(output.innerHTML)
+        }
+        else if (operation == "-") {
+            output.innerHTML = subtract(+num1,+num2)
+            clear(output.innerHTML)
+        }
+        else if (operation == "*") {
+            output.innerHTML = multiply(+num1,+num2)
+            clear(output.innerHTML)
+        }
+        else if (operation == "/") {
+            output.innerHTML = divide(+num1,+num2)
+            clear(output.innerHTML)
+        }
+    }
+}
+
 
 
 function inputs(){
@@ -84,6 +124,39 @@ function inputs(){
     const zero = document.querySelector("#zero")
     zero.addEventListener("click", () => {
         buttonLogic(0)
+    })
+
+    const plus = document.querySelector("#plus")
+    plus.addEventListener("click", () => {
+        operation = "+"
+    })
+
+    const minus = document.querySelector("#minus")
+    minus.addEventListener("click", () => {
+        operation = "-"
+    })
+
+    const multiply = document.querySelector("#multiply")
+    multiply.addEventListener("click", () => {
+        operation = "*"
+    })
+
+    const divide = document.querySelector("#divide")
+    divide.addEventListener("click", () => {
+        operation = "/"
+    })
+
+    const equal = document.querySelector("#eql")
+    equal.addEventListener("click", () => {
+        applyOperation()
+    })
+
+    const clr = document.querySelector("#clr")
+    clr.addEventListener("click", () => {
+        num1 = ""
+        num2 = ""
+        operation = ""
+        output.innerHTML = "0";
     })
 }
 
